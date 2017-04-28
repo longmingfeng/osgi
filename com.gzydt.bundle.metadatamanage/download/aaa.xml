@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/metatype">
+<OCD description="aaa" id="aaa" name="aaa1">
+<AD default="aaa" description="1" id="aaa" index="1" name="aaa" required="true" row="1" showTip="true" type="aaa"/>
+<AD default="bbb" description="2" id="bbb" index="3" name="bbb" required="false" row="3" showTip="true" type="bbb"/>
+<AD default="ccc" description="4" id="ccc" index="4" name="ccc" required="true" row="4" showTip="true" type="ccc"/>
+</OCD>
+</metatype:MetaData>

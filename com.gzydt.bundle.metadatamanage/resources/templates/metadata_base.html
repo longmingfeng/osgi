@@ -1,0 +1,191 @@
+<script type="text/javascript" src="${pluginRoot}/res/js/metadata_base.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/plugin/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/plugin/validate.message.cn.js"></script>
+<div>
+   <div class="list-group col-xs-2 ">
+      <a href="${pluginRoot}/metadata" class="list-group-item glyphicon glyphicon-tags">&nbsp;元数据</a>
+	  <a href="#" class="list-group-item active">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;基础元数据</a>
+	  <a href="${pluginRoot}/metadata_type" class="list-group-item">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;类型元数据</a>
+	  <a href="${pluginRoot}/metadata_resource" class="list-group-item">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;资源元数据</a>
+   </div>
+   
+   <div class="col-xs-10">
+     <button type="button"
+				class="btn btn-primary glyphicon glyphicon-plus" data-toggle="modal"
+				data-target="#baseMeta_Info" onclick="ininMetaDate()">新增元数据</button>
+	 <button type="button"
+				class="btn btn-primary glyphicon glyphicon-share" data-toggle="modal"
+				data-target="#getBaseMeta_Info" onclick="ininMetaDate()">提取元数据</button>
+     <table class="table table-hover" style="margin-top: 10px">
+			<thead>
+				<tr>
+					<td class="active">编号</td>
+					<td class="success">名称</td>
+					<td class="warning">类型</td>
+					<td class="danger">作者</td>
+					<td class="info">状态</td>
+					<td class="active">描述</td>
+					<td class="success">操作</td>
+				</tr>
+			</thead>
+			<tbody id="base_list">
+			</tbody>
+			<tfoot>
+			  <tr>
+			    <td colspan="7">
+			    <div style="float: right;">
+				   <nav>  
+				       <ul class="pagination" id="pageUL" style="padding: 0px;margin: 0px;"></ul>
+				       <div style="float:right;margin-left:20px;margin-top: 8px">
+		        	     <span class="pgo">跳转<input type="text" style="width:30px;height:20px" id="goValu">页</span>
+		        	     <a href="#" class="pbtn" id="go">GO</a>
+		        	   </div>  
+				   </nav>  
+		        </div> 
+			    </td>
+			  </tr>
+			</tfoot>
+		</table>
+   </div>
+</div>
+
+<!-- --------------------------------------------------------------------------- -->
+<div class="modal fade bs-example-modal-lg" id="baseMeta_Info" tabindex="-1" role="dialog"
+	aria-labelledby="baseMetaLabel" aria-hidden="false">
+	<div class="modal-dialog" style="width:1200px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="baseMetaLabel">基础元数据信息</h4>
+			</div>
+			<div class="modal-body">
+			  <ul class="nav nav-tabs" style="padding: 0px;margin: 0px">
+				  <li role="presentation" id="basicFormInfoLi" class="active" onClick="changeFormInfo(1)"><a href="#">基本信息</a></li>
+				  <li role="presentation" id="fieldFormInfoLi"><a href="#" onClick="changeFormInfo(0)">字段信息</a></li>
+			  </ul>
+			  <div id="basicFormInfoDiv">
+			  <form class="form-inline" role="form" id="baseMetaDataForm">
+				    <div><p id="emsg" style="color:red;font-weight: bold;"></p></div>
+					<div class="form-group">
+					    <label><span style="color:red">*</span>编号：</label>
+					    <input type="text" size="60"  class="form-control required" name="metadataId" id="metadataId" placeholder="com.gzydt.metatype.testconfig(文件名、OCD)">
+					</div>
+					<div class="form-group">
+					    <label><span style="color:red">*</span>名称：</label>
+					    <input type="text" size="60"  class="form-control required" name="metadataName" id="metadataName" placeholder="testconfig系统配置">
+					</div>
+					<div class="form-group">
+					    <label><span style="color:red">*</span>类型：</label>
+					    <input type="text" size="60"  class="form-control required" name="metadataType" id="metadataType" placeholder="测试类型">
+					</div>
+					<div class="form-group">
+					    <label>&nbsp;作者：</label>
+					    <input type="text" size="60"  class="form-control" id="metadataauthor" placeholder="李计达">
+					</div>
+					<div class="form-group">
+					    <label>&nbsp;状态：</label>
+					    <select id="metadataState" class="form-control">
+					      <option value="1">启用</option>
+					      <option value="0">停用</option>
+					    </select>
+					</div>
+					<div class="form-group">
+					    <label>&nbsp;描述：</label>
+					    <textarea  class="form-control" id="metadataDesc" rows="7" cols="137" placeholder="这是一个系统配置"></textarea>
+					</div>
+				  </form>
+			      </div>
+			      <div id="fieldFormInfoDiv" style="display:none">
+				  <div>
+				  <div style="float:left"></div>
+				     <div style="float:right;margin-bottom: 5px">
+					  <button type="button"class="btn btn-primary btn-sm" onclick="addField()"><span class="glyphicon glyphicon-plus"></span></button>
+					  <button type="button"class="btn btn-primary btn-sm" onclick="removeField()"><span class="glyphicon glyphicon-minus"></span></button>
+				  </div>
+				  </div>
+				  <form role="form" id="baseMetaDataFieldForm">
+				  <div><p id="emsgf" style="color:red;font-weight: bold;"></p></div>
+				  <table class="table table-hover" id="field_table">
+				    <thead>
+				      <tr>
+				          <td class="active"><input type='checkbox' name="allCheck" onchange="selectAll()"></td>
+					      <td class="success"><span style="color:red">*</span>编号（AD）</td>
+					      <td class="warning"><span style="color:red">*</span>名称</td>
+					      <td class="danger"><span style="color:red">*</span>类型</td>
+					      <td class="info">默认值</td>
+					      <td class="active">是否主键</td>
+					      <td class="success">是否为空</td>
+					      <td class="warning">索引值</td>
+					      <td class="danger">行数</td>
+					      <td class="info">提示值</td>
+					      <td class="active">描述</td>
+				      </tr>
+				    </thead>
+				    <tbody id="base_field_list">
+				      <tr></tr>
+			        </tbody>
+				  </table>
+				 </form>
+				 </div>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-default" onclick="saveOrUpdate()">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- --------------------------------------------------------------------------- -->
+<div class="modal fade" id="getBaseMeta_Info" tabindex="-1" role="dialog"
+	aria-labelledby="getBaseMetaLabel" aria-hidden="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="getBaseMetaLabel">提取基础元数据信息</h4>
+			</div>
+			<div class="modal-body" >
+				 <form class="form-horizontal" id="getBaseMetaForm">
+				    <div><p id="gemsg" style="color:red;font-weight: bold;padding-left: 30px;"><p></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">位置：</label>
+						<div class="col-sm-10">
+							<input type="file" id="file1" name="file" class="form-control"  />
+							<input type="hidden" id="fileName"/>
+							<input type="button"  value="上传" onclick="upload()" class="btn btn-primary" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label"><span style="color:red">*</span>类型：</label>
+						<div class="col-sm-10">
+							<input type="text"  class="form-control required" name="gmetadataType" id="gmetadataType" placeholder="测试类型">
+						</div>
+					</div>
+                    <div class="form-group">
+						<label class="col-sm-2 control-label">作者：</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="gmetadataauthor" placeholder="李计达">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状态：</label>
+						<div class="col-sm-10">
+							<select id="gmetadataState" class="form-control">
+						      <option value="1">启用</option>
+						      <option value="0">停用</option>
+						    </select>
+						</div>
+					</div>
+				  </form>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-default" onclick="pick()">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>

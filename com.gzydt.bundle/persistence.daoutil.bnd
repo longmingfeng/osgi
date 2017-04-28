@@ -1,0 +1,14 @@
+Is_SystemBundle : false
+
+Bundle-Version: 1.0.0
+
+
+Bundle-Category: 工具类
+
+Bundle-Vendor: 广州市宇阳数码科技有限公司
+
+Bundle-Description: jpa通用的增删改查接口
+
+Export-Package: \
+	com.gzydt.bundle.database.dao,\
+	com.gzydt.bundle.database.dao.impl

@@ -1,0 +1,104 @@
+[
+    {
+        "name": "homePage",
+        "label": "首页"
+    },
+    {
+        "name": "resourceNavigate",
+        "label": "资源导航"
+    },
+    {
+        "name": "applicationMng",
+        "label": "应用系统管理"
+    },
+    {
+        "name": "metadataMng",
+        "label": "元数据管理"
+    },
+    {
+        "name": "runningMng",
+        "label": "运行管理",
+        "childs": [
+            {
+                "name": "",
+                "label": "调度管理"
+            },
+            {
+                "name": "",
+                "label": "集群管理"
+            }
+        ]
+    },
+    {
+        "name": "systemMng",
+        "label": "系统管理",
+        "childs": [
+            {
+                "name": "securityMng",
+                "label": "安全管理",
+                "childs": [
+                    {
+                        "name": "",
+                        "label": "受控资源管理"
+                    },
+                    {
+                        "name": "",
+                        "label": "授权管理"
+                    },
+                    {
+                        "name": "",
+                        "label": "安全审计"
+                    }
+                ]
+            },
+            {
+                "name": "parameterMng",
+                "label": "参数管理",
+                "childs": [
+                    {
+                        "name": "",
+                        "label": "子系统参数配置"
+                    },
+                    {
+                        "name": "",
+                        "label": "参数变更日志"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "helpMng",
+        "label": "帮助",
+        "childs": [
+            {
+                "name": "",
+                "label": "使用导航"
+            },
+            {
+                "name": "",
+                "label": "子系统帮助"
+            },
+            {
+                "name": "",
+                "label": "检索"
+            },
+            {
+                "name": "",
+                "label": "使用技巧"
+            },
+            {
+                "name": "",
+                "label": "使用反馈"
+            },
+            {
+                "name": "",
+                "label": "运行配置（配置概要）"
+            }
+        ]
+    },
+    {
+        "name": "otherConfig",
+        "label": "其他"
+    }
+]

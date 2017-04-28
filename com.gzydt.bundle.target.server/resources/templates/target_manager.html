@@ -1,0 +1,32 @@
+<script type="text/javascript" src="${pluginRoot}/res/js/register_target.js"></script>
+<div class="btn-group" style="float:right">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
+                     节点容器下载
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu pull-right" role="menu">
+      <li onclick="download(1)"><a>自带jvm环境下载</a></li>
+      <li onclick="download(0)"><a>不带jvm环境下载</a></li>
+    </ul>
+</div>
+<ul class="nav nav-tabs" role="tablist">
+	<li role="presentation" class="active"><a href="#">节点容器列表</a></li>
+</ul>
+<table class="table tablesorter nicetable noauto" style="word-break: break-all; word-wrap: break-word">
+	<thead>
+		<tr>
+			<th width="30px"><span class="glyphicon glyphicon-cog"></span></th>
+			<th class=info>序号</th>
+			<th class=success>名称</th>
+			<th class=wraning>所属单位</th>
+			<th class=danger>负责人</th>
+			<th>电话</th>
+			<th class=success>邮箱</th>
+			<th class=wraning>当前版本</th>
+			<th class=danger>更新时间</th>
+			<th class=info>描述</th>
+		</tr>
+	</thead>
+	<tbody id="node_list">
+	</tbody>
+</table>

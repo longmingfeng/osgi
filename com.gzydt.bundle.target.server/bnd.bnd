@@ -1,0 +1,27 @@
+Include-Resource: \
+	lib=lib
+	
+Bundle-ClassPath: .,\
+	lib/commons-logging-1.1.1.jar,\
+	lib/json-lib-2.4-jdk15.jar,\
+	lib/commons-lang-2.6.jar,\
+	lib/commons-beanutils-1.7.0.jar,\
+	lib/ezmorph-1.0.6.jar,\
+	lib/commons-collections-3.1.jar
+	
+-classpath:.,\
+	lib/commons-logging-1.1.1.jar,\
+	lib/json-lib-2.4-jdk15.jar,\
+	lib/commons-lang-2.6.jar,\
+	lib/commons-beanutils-1.7.0.jar,\
+	lib/ezmorph-1.0.6.jar,\
+	lib/commons-collections-3.1.jar
+	
+-buildpath: \
+	osgi.core;version=6.0,\
+	com.gzydt.gjzh.webconsole;version=1.1,\
+	xstream;version=1.4,\
+	org.apache.servicemix.bundles.xpp3,\
+	org.apache.felix.http.servlet-api;version=1.1,\
+	org.apache.felix.http.api
+-sub: *.bnd

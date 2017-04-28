@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/metatype">
+  <!-- 
+      说明：OCD 相对于一个参数配置模板、参数配置集合。
+      OCD:id 模板唯一标识
+      OCD:name 模板名称
+      OCD:description 模板描述
+      
+      AD 参数项
+      AD:id 参数唯一标识
+      AD:name 参数名称
+      AD:description 参数描述 
+      AD:type 参数类型 (String Long Double Float Integer Byte Char Boolean Short)
+      AD:required 是否是必填项 ，默认为true
+      AD:default 默认值（若是指定多个值用逗号分开，如：value1,value2）
+      AD:cardinality value数量基数，同时，多值输入时,指定最大保存值的数量，
+      
+                 扩展参数:
+      AD:row 栅格布局列宽
+      AD:index 序号
+      AD:showTip 是否用tip的形式显示描述,默认为true
+   -->
+
+
+
+  <OCD description="这是一个系统配置" name="testconfig系统配置" id="com.gzydt.metatype.testconfig">
+
+    <!-- 下拉框配置  属性说明： cardinality="0" type=String-->
+    <AD name="日志等级" description="选择日志等级" id="system.log.level" required="true" default="debug" type="String" cardinality="0" row="6"
+     index="12" showTip="true">
+    <Option label="info" value="info"/>
+    <Option label="debug" value="debug"/>
+    <Option label="error" value="error"/>
+    </AD>  
+    
+    <!-- 多选框配置  属性说：cardinality必须配置大于1 type="String" -->
+    <AD name="选择可使用的模块" description="系统模块选择" id="system.modules" required="false" default="1,2" type="String" cardinality="2" 
+    row="6" index="2" showTip="true">
+    <Option label="日志模块" value="1"/>
+    <Option label="用户模块" value="2"/>
+    <Option label="系统管理模块" value="3"/>
+     </AD>  
+     
+    <!-- 多文本框配置，属性说：cardinality必须配置大于1 -->
+    <AD name="系统初始化账号" description="系统初始化账号" id="system.user.names" required="false" default="" type="String" cardinality="100" 
+    row="6" index="3" showTip="true"/>
+    
+    <!-- 密码框配置，属性说：id包含password type="String"-->
+    <AD name="用户初始化密码" description="用户初始化密码" id="system.user.password" required="false" default="123" row="6" type="String" index="3" showTip="true"/>
+   
+    <AD name="系统描述" description="系统描述" id="system.descr" required="false" type="String" default="描述" row="12" index="12" showTip="true"/>
+   
+    <AD name="seesion超时时间(S)" description="seesion超时时间(S)" required="true" id="system.timeout" row="6" type="Long" index="3" showTip="true"/>
+  
+    <AD name="是否定时删除系统缓存" description="是否定时删除系统缓存" id="system.cache.delete" required="true" type="Boolean" default="true"
+     row="6" index="4" showTip="true"/>
+
+  </OCD>
+
+
+
+  <OCD description="用户配置" name="用户" id="com.gzydt.metatype.testconfig.user">
+
+    
+    <!-- 密码框配置，属性说：id包含password type="String"-->
+    <AD name="用户名" description="用户名" id="system.user.name" required="true" default="123" row="6" type="String" index="3" showTip="true"/>
+   
+    <AD name="密码" description="用户初始化密码" id="system.user.password" required="false" type="String" row="6" index="12" showTip="true"/>
+   
+    <AD name="年龄" description="年龄" required="false" id="system.user.year" row="6" type="Long" index="3" showTip="true"/>
+
+  </OCD>
+
+    <!-- 单例配置 -->
+
+    <!-- 工厂配置 -->
+<!-- 
+
+        <Designate factoryPid="com.gzydt.metatype.testconfig.TestFactroyConfig">
+        <Object ocdref="com.gzydt.metatype.testconfig"/>
+    </Designate>
+ -->
+    <Designate pid="com.gzydt.metatype.testconfig.TestConfig">
+        <Object ocdref="com.gzydt.metatype.testconfig"/>
+    </Designate>
+
+    <Designate factoryPid="com.gzydt.metatype.testconfig.userFactroyConfig">
+        <Object ocdref="com.gzydt.metatype.testconfig.user"/>
+    </Designate>
+
+</metatype:MetaData>

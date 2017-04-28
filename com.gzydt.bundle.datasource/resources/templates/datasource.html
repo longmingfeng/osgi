@@ -1,0 +1,231 @@
+<script type="text/javascript" src="${pluginRoot}/res/js/datasource.js"></script>
+<div>
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#">数据源列表信息</a></li>
+		<li role="presentation"><a href="${pluginRoot}/jpa">持久化实体信息</a></li>
+		<li role="presentation"><a href="${pluginRoot}/driver">驱动列表信息</a></li>
+	</ul>
+	<div>
+		<div style="float: right; margin-top: 5px">
+			<button type="button"
+				class="btn btn-primary glyphicon glyphicon-plus" data-toggle="modal"
+				data-target="#dataSourceModal" onclick="initDs()">新增数据源</button>
+		</div>
+		<table class="table tablesorter nicetable noauto">
+			<thead>
+				<tr>
+					<td>序号</td>
+					<td>数据源名称</td>
+					<td>描述</td>
+					<td>驱动类型</td>
+					<td>注册状态</td>
+					<td>连接池</td>
+				</tr>
+			</thead>
+			<tbody id="datasource_list">
+			</tbody>
+		</table>
+	</div>
+	<div class="modal fade" id="dataSourceModal" tabindex="-1"
+		role="dialog" aria-labelledby="dataSourceModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="dataSourceModalLabel">数据源连接信息</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							数据源配置信息<span id="dataSourceH" onclick="hiddenDataSource()"
+								class="glyphicon glyphicon-minus" style="float: right"></span>
+						</div>
+						<div class="panel-body" id="dataSourceCont">
+							<form class="form-horizontal" role="form" id="editorDSForm">
+								<div class="form-group">
+									<label class="col-sm-4 control-label">数据源名称：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="dsname">
+									</div>
+								</div>
+								<div class="form-group" id="select_type">
+									<label class="col-sm-4 control-label">数据库类型：</label>
+									<div class="col-sm-8">
+										<select class="form-control" id="type">
+										</select>
+									</div>
+								</div>
+								<div class="form-group" id="input_type">
+									<label class="col-sm-4 control-label">数据库类型：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="type_input">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">数据源IP：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="jdbcIp">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">数据源端口：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="jdbcPort">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">数据库名称：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="jdbcDBName">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">用户名：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="username">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">密码：</label>
+									<div class="col-sm-8">
+										<input type="password" class="form-control" id="password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label">描述：</label>
+									<div class="col-sm-8">
+										<textarea class="form-control" rows="5" id="context"></textarea>
+									</div>
+								</div>
+								<div class="form-group" id="radio_jta">
+									<label class="col-sm-4 control-label">事务管理：</label>
+									<div class="col-sm-8">
+										<label class="radio-inline"> <input type="radio"
+											name="jta" id="true" value="true" checked="checked">
+											是
+										</label> <label class="radio-inline"> <input type="radio"
+											name="jta" id="false" value="false"> 否
+										</label>
+									</div>
+								</div>
+								<div class="form-group" id="input_jta">
+									<label class="col-sm-4 control-label">事务管理：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="jta_input" >
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							连接池配置信息<span id="poolH" onclick="hiddenPool()"
+								class="glyphicon glyphicon-plus" style="float: right"></span>
+						</div>
+						<div class="panel-body" id="poolCont">
+							<form class="form-horizontal" role="form" id="editorPoolForm">
+								<div class="form-group" id="radio_pooltype">
+									<label class="col-sm-4 control-label">连接池类型：</label>
+									<div class="col-sm-8">
+										<label class="radio-inline"> <input type="radio"
+											name="pooltype" id="default" value="default"
+											 onchange="showPoolProp()" checked="checked"> default
+										</label> <label class="radio-inline"> <input type="radio"
+											name="pooltype" id="hikari" value="hikari" onchange="showPoolProp()"> hikari
+										</label> <label class="radio-inline"> <input type="radio"
+											name="pooltype" id="druid" value="druid" onchange="showPoolProp()"> druid
+										</label>
+									</div>
+								</div>
+								<div class="form-group" id="input_pooltype">
+									<label class="col-sm-4 control-label">连接池类型：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="pooltype_input" style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group" >
+									<label class="col-sm-4 control-label">初始化连接数：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="initNum" style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group" id="div_maxNum">
+									<label class="col-sm-4 control-label">最大连接数：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="maxNum" style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group" id="div_maxActive">
+									<label class="col-sm-4 control-label">最大活跃数：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="maxActive" style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group" id="div_maxIdle">
+									<label class="col-sm-4 control-label">最大空闲时间（ms）：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="maxIdle" style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group"  id="div_minIdle">
+									<label class="col-sm-4 control-label">最小空闲时间（ms）：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="minIdle"  style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group"  id="div_maxWait">
+									<label class="col-sm-4 control-label">最大等待时间（ms）：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="maxWait" style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group" style="display:none" id="div_timeBetweenEvictionRunsMillis">
+									<label class="col-sm-4 control-label">检测连接间隔时间（ms）：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control"
+											id="timeBetweenEvictionRunsMillis"  style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group" style="display:none" id="div_minEvictableIdleTimeMillis">
+									<label class="col-sm-4 control-label">最小撤销时间（ms）：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control"
+											id="minEvictableIdleTimeMillis"  style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group" style="display:none" id="div_connectionTimeout">
+									<label class="col-sm-4 control-label">连接超时时间（ms）：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="connectionTimeout" style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group" style="display:none" id="div_idleTimeout">
+									<label class="col-sm-4 control-label">空闲超时时间（ms）：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="idleTimeout"  style="text-align: right">
+									</div>
+								</div>
+								<div class="form-group" style="display:none" id="div_maxLifetime">
+									<label class="col-sm-4 control-label">最大生命时间（ms）：</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" id="maxLifetime" style="text-align: right">
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary"  data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="testConn"  onclick="testConn()">测试连接</button>
+					<button type="button" class="btn btn-primary" id="saveDs" data-dismiss="modal"
+						onclick="saveDS()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

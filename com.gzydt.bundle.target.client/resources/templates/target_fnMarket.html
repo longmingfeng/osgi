@@ -1,0 +1,160 @@
+<link href="${pluginRoot}/res/css/target.css" rel="stylesheet"
+	type="text/css" />
+<script type="text/javascript"
+	src="${pluginRoot}/res/js/target_fnMarket.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/util/page.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/plugin/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/plugin/validate.message.cn.js"></script>
+<ul class="nav nav-tabs" role="tablist" id="menu">
+	<li role="presentation" class="active"><a href="#">组件仓库</a></li>
+	<li role="presentation"><a href="${pluginRoot}/target_info">容器信息</a></li>
+	<li role="presentation"><a href="${pluginRoot}/target_serverInfo">服务器信息
+			<span class="badge" id="errorNum"></span>
+	</a></li>
+	<li role="presentation"><a href="${pluginRoot}/target_bundleInfo">组件信息</a></li>
+</ul>
+<!-- 展示功能列表 -->
+<form role="form" id="funList" style="display: none">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<input type="button" class="btn btn-primary btn-xs" value="查看安装日志" onclick="getOperateLog()" data-toggle="modal" data-target="#logModal"/>
+		</div>
+		<div class="panel-body" id="fnContainer"></div>
+	</div>
+	<div style="float: right;">
+		<nav>
+			<ul class="pagination" id="pageUL"></ul>
+		</nav>
+	</div>
+</form>
+<!-- 注册节点 -->
+<div style="display: none" id="registTarget">
+	<div class="alert alert-danger">
+		<div
+			style="float: left; font-size: 12px; height: 30px; line-height: 30px;">该容器节点未注册服务器</div>
+		<div style="margin-left: 10%;">
+			<button class="btn btn-primary btn-xs" data-toggle="modal"
+				data-target="#node_info" style="line-height: 30px; font-size: 12px;"
+				onclick="getDefaultServerURL()">点击注册</button>
+		</div>
+	</div>
+</div>
+<!-- 连接失败 -->
+<div style="display: none" id="serverFailTarget">
+	<div class="alert alert-warning">
+		<div>
+			当前连接服务器组件仓库：<span>xxx</span>连接失败
+		</div>
+	</div>
+</div>
+<div class="modal fade " id="node_info" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">节点容器注册信息</h4>
+			</div>
+			<div class="modal-body" style="float: left">
+				<form class="form-horizontal" role="form" id="editorForm">
+					<div class="form-group">
+						<label class="col-sm-4 control-label"><span
+							style="color: red">*&nbsp;</span>节点容器ID：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control required" id="editTargeId"
+								name="editTargeId" value="target-1">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label"><span
+							style="color: red">*&nbsp;</span>节点容器名称：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control required"
+								id="editTargetName" name="editTargetName" value="容器1">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">节点容器所属单位：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editTargetOrg" value="宇阳数码科技有限公司">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">节点容器负责人：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editPrincipal" value="admin">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">节点容器负责电话：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editPhone" value="020-38259768">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">节点容器负责人邮箱：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control email" id="editEmail" value="admin@gzydt.com">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label"><span
+							style="color: red">*&nbsp;</span>服务器地址：</label>
+						<div class="col-sm-8">
+							<div class="form-inline">
+								<div class="input-group" style="width: 74%">
+									<div class="input-group-addon">http://</div>
+									<input class="form-control required" type="text"
+										name="editServerIp" placeholder="ip地址" id="editServerIp">
+								</div>
+								<div class="form-group" style="width: 30%">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<label>:</label>
+										</div>
+										<input class="form-control required" type="text"
+											name="editServerPort" placeholder="端口" id="editServerPort">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">节点容器描述：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editDescript">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer" style="clear: both">
+				<button type="button" class="btn btn-default"  
+					 onclick="register()">注册节点容器</button>
+				<button type="button" class="btn btn-default" id="closeForm"
+					data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">系统安装日志</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+        	<div class="panel panel-default">
+			  <div class="panel-body"  id="logContent" style="text-align:center; height:400px; overflow:auto"></div>
+			</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>

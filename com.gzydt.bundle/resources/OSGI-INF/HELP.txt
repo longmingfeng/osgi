@@ -1,0 +1,156 @@
+<div>
+	<div>
+		<h3>基于eclipseLink的JPA持久化操作指南<h3>
+	</div>
+	
+	<div>
+		<h5>1，项目的根目录创建load目录，在此目录下创建com.gzydt.database.datasource-name.cfg文件,写入数据源信息：</h5>
+		<h6>
+			#oracle数据库
+			name=usimDS2
+			#Oracle8i对应驱动名为：oracle.jdbc.driver.OracleDriver,最新版本驱动名为：oracle.jdbc.OracleDriver。
+			#oracle.jdbc.OracleDriver继承了oracle.jdbc.driver.OracleDriver
+			driverClassName=oracle.jdbc.OracleDriver
+			jdbcUrl=jdbc\:oracle\:thin\:@192.168.10.171\:1521\:ORCL
+			username=quality
+			password=quality
+			discription=test...
+			
+			managed=true
+			
+			#连接池
+			pool=druid
+			maxActive=20
+			initialSize=3
+			minIdle=1
+			maxWait=60000
+			timeBetweenEvictionRunsMillis=60000
+			minEvictableIdleTimeMillis=300000
+			#validationQuery=select 1 from dual
+			testWhileIdle=true
+			testOnBorrow=false
+			testOnReturn=false
+			poolPreparedStatements=false
+			maxPoolPreparedStatementPerConnectionSize=20
+			filters=stat
+
+		</h6>
+	</div>
+	
+	<div>
+		<h5>2，项目的根目录创建persistence目录，在此目录下创建psersistence.xml文件,内容如下：</h5>
+	  	<h6>
+			<persistence version="1.0"
+					xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+				  		http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+				
+					<persistence-unit name="testPU" transaction-type="JTA">
+						<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+				
+						<jta-data-source>
+							<![CDATA[
+							osgi:javax.sql.DataSource/(name=usimDS2)
+							]]>
+						</jta-data-source>
+				
+						<class>com.gzydt.bundle.database.vo.JpaBridgeManager</class>
+						<class>com.gzydt.bundle.database.vo.JpaBridgeManager2</class>
+				
+						<exclude-unlisted-classes>true</exclude-unlisted-classes>
+				
+						<properties>
+				
+							<!-- 是否需要进行数据库结构管理,"数据库结构管理组件"基于 Flyway 技术实现，关于升级脚本（或类）的写法可参考相关文档 -->
+							<!-- <property name=" com.gzydt.database.schema.enabled" value="false" /> -->
+							<!-- 指定升级脚本的位置 -->
+							<!-- <property name="com.gzydt.database.schema.locations" value="" /> -->
+				
+							<property name="org.amdatu.jpa.allowNonTransactionalEntityManagerAccess"
+								value="true" />
+							<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+							<property name="eclipselink.logging.level" value="FINEST" />
+							<property name="eclipselink.logging.level.sql" value="FINEST" />
+							<!-- <property name="eclipselink.logging.file" value="logs/output.log" /> -->
+							<property name="eclipselink.logging.parameters" value="true" />
+							<property name="eclipselink.show_sql" value="true" />
+							<property name="eclipselink.orm.throw.exceptions" value="true" />
+							<property name="eclipselink.query-results-cache" value="false" />
+							<property name="eclipselink.cache.shared.default" value="false" />
+							<property name="eclipselink.weaving" value="static" />
+						</properties>
+					</persistence-unit>
+				
+				</persistence> 
+			
+		</h6>
+	</div>
+	
+	<div>	
+		<h5>3,在生成组件的bnd文件中加入以下内容：</h5>
+		<h6>
+			Include-Resource:  \
+				META-INF/persistence.xml=persistence/persistence.xml
+				
+			Meta-Persistence: META-INF/persistence.xml 
+		</h6>
+	</div>
+	
+	<div>	
+		<h5>4,Activator类的启动方法加入以下代码，注入相关服务</h5>
+		<h6>
+			Properties p2 = new Properties();
+		    p2.put(ManagedTransactional.SERVICE_PROPERTY, BridgeManagerDao.class.getName());
+		
+		    dm.add(createComponent()
+		        .setInterface(Object.class.getName(), p2)
+		        .setImplementation(BridgeManagerDaoImpl.class)
+		        .add(createServiceDependency()
+		            .setService(EntityManager.class, "(osgi.unit.name=testPU)").setRequired(true))
+		        .add(createServiceDependency()
+		            .setService(LogService.class).setRequired(false)));
+	    </h6>
+	</div>
+	 
+	<div>          
+		<h5>5,此组件中的例子BridgeManagerDaoImpl这个实现类，必须加入@Transactional，之后就可以利用EntityManager类持久化任何数据了</h5>
+	</div>
+	
+	<div>
+		<h5>6，运行的bndrun文件，需要运行的组件有：</h5>
+		<h6>
+			org.apache.felix.log;version=1.0.1,\
+			osgi.cmpn;version='[5.0.0,5.0.1)',\
+			org.apache.felix.http.jetty,\
+			org.apache.felix.http.api,\
+			org.apache.felix.http.servlet-api,\
+			org.apache.felix.http.whiteboard,\
+			org.apache.felix.configadmin,\
+			org.apache.felix.dependencymanager,\
+			org.apache.felix.dependencymanager.runtime,\
+			org.apache.felix.dependencymanager.shell,\
+			org.apache.felix.gogo.runtime;version='[0.16.2,0.16.2]',\
+			org.apache.felix.gogo.shell;version='[0.12.0,0.12.0]',\
+			org.apache.felix.gogo.command;version='[0.16.0,0.16.0]',\
+			org.apache.felix.bundlerepository,\
+			org.apache.felix.fileinstall,\
+			org.apache.commons.lang3,\
+			org.eclipse.persistence.antlr,\
+			org.eclipse.persistence.asm,\
+			org.eclipse.persistence.core,\
+			org.eclipse.persistence.jpa,\
+			org.eclipse.persistence.jpa.jpql,\
+			org.ops4j.pax.logging.pax-logging-api,\
+			org.ops4j.pax.logging.pax-logging-service,\
+			org.h2;version=1.4.180,\
+			com.mysql.jdbc;version=5.1.38,\
+			org.ops4j.pax.jdbc.mysql;version=0.10.0,\
+			com.gzydt.database.oracle,\
+			com.gzydt.database.schema,\
+			com.gzydt.database.datasource,\
+			com.gzydt.database.jpa.eclipselink,\
+			com.gzydt.database.jta.api,\
+			com.gzydt.database.jta.manager
+		</h6>
+	</div>
+</div>

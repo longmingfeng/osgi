@@ -1,0 +1,10 @@
+-buildpath: \
+	org.apache.felix.http.servlet-api,\
+	osgi.core;version=6.0,\
+	osgi.cmpn;version='[5.0.0,5.0.1)',\
+	org.apache.felix.http.api,\
+	org.apache.felix.dependencymanager,\
+	org.apache.felix.dependencymanager.runtime,\
+	org.amdatu.persistence2_0;version='[1.0.1,1.0.1]',\
+	com.gzydt.logging.service.log4j2.extend
+-sub: *.bnd

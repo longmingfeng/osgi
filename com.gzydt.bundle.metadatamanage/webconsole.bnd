@@ -1,0 +1,11 @@
+Private-Package: com.gzydt.bundle.metadatamanage.webconsole
+Bundle-Activator: com.gzydt.bundle.metadatamanage.webconsole.Activator
+Include-Resource: resources/
+Import-Package: \
+	javax.servlet;resolution:=optional,\
+	javax.servlet.http;resolution:=optional,\
+	org.apache.felix.webconsole;resolution:=optional,\
+	org.osgi.framework;resolution:=optional,\
+	*;resolution:=optional
+Bundle-Version: 1.0.0
+Bundle-Description: 元数据管理前端页面

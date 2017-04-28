@@ -1,0 +1,21 @@
+Is_SystemBundle : false
+Include-Resource:  \
+	META-INF/persistence.xml=persistence/persistence.xml,\
+	resources
+	
+Meta-Persistence: META-INF/persistence.xml
+
+
+Bundle-Version: 1.0.0
+Bundle-Activator: com.gzydt.bundle.database.Activator
+
+Bundle-Category: 数据库类
+Bundle-Vendor: 广州市宇阳数码科技有限公司
+Bundle-Description: 基于eclipseLink技术，实现JPA持久化开发框架
+Private-Package: \
+	com.gzydt.bundle.database,\
+	com.gzydt.bundle.database.controller,\
+	com.gzydt.bundle.database.dao,\
+	com.gzydt.bundle.database.dao.impl,\
+	com.gzydt.bundle.database.vo
+Export-Package: com.gzydt.bundle.database.vo

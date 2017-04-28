@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/metatype">
+<OCD description="这是一个系统配置" name="testconfig系统配置" id="com.gzydt.metatype.testconfig">
+
+    <!-- 下拉框配置  属性说明： cardinality="0" type=String-->
+    <AD name="日志等级" description="选择日志等级" id="system.log.level" required="true" default="debug" type="String" cardinality="0" row="6"
+     index="12" showTip="true">
+    <Option label="info" value="info"/>
+    <Option label="debug" value="debug"/>
+    <Option label="error" value="error"/>
+    </AD>  
+    
+    <!-- 多选框配置  属性说：cardinality必须配置大于1 type="String" -->
+    <AD name="选择可使用的模块" description="系统模块选择" id="system.modules" required="false" default="1,2" type="String" cardinality="2" 
+    row="6" index="2" showTip="true">
+    <Option label="日志模块" value="1"/>
+    <Option label="用户模块" value="2"/>
+    <Option label="系统管理模块" value="3"/>
+     </AD>  
+     
+    <!-- 多文本框配置，属性说：cardinality必须配置大于1 -->
+    <AD name="系统初始化账号" description="系统初始化账号" id="system.user.names" required="false" default="" type="String" cardinality="100" 
+    row="6" index="3" showTip="true"/>
+    
+    <!-- 密码框配置，属性说：id包含password type="String"-->
+    <AD name="用户初始化密码" description="用户初始化密码" id="system.user.password" required="false" default="123" row="6" type="String" index="3" showTip="true"/>
+   
+    <AD name="系统描述" description="系统描述" id="system.descr" required="false" type="String" default="描述" row="12" index="12" showTip="true"/>
+   
+    <AD name="seesion超时时间(S)" description="seesion超时时间(S)" required="true" id="system.timeout" row="6" type="Long" index="3" showTip="true"/>
+  
+    <AD name="是否定时删除系统缓存" description="是否定时删除系统缓存" id="system.cache.delete" required="true" type="Boolean" default="true"
+     row="6" index="4" showTip="true"/>
+
+ </OCD>
+
+    <Designate factoryPid="com.gzydt.metatype.testconfig.userFactroyConfig">
+        <Object ocdref="com.gzydt.metatype.testconfig.user"/>
+    </Designate>
+
+</metatype:MetaData>
+

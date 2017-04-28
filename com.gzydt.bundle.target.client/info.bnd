@@ -1,0 +1,52 @@
+Is_SystemBundle : false
+Bundle-Category: 开发组件
+
+Include-Resource: \
+	lib=lib
+	
+Bundle-ClassPath: .,\
+	lib/commons-logging-1.1.1.jar,\
+	lib/json-lib-2.4-jdk15.jar,\
+	lib/commons-lang-2.6.jar,\
+	lib/commons-beanutils-1.7.0.jar,\
+	lib/ezmorph-1.0.6.jar,\
+	lib/commons-collections-3.1.jar
+	
+-classpath:.,\
+	lib/commons-logging-1.1.1.jar,\
+	lib/json-lib-2.4-jdk15.jar,\
+	lib/commons-lang-2.6.jar,\
+	lib/commons-beanutils-1.7.0.jar,\
+	lib/ezmorph-1.0.6.jar,\
+	lib/commons-collections-3.1.jar
+	
+Bundle-SymbolicName: com.gzydt.bundle.target.client.info
+Bundle-Description: 提供target端相关的信息与操作
+Bundle-Name: 容器信息与操作组件
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Private-Package: com.gzydt.bundle.target.client.info
+Bundle-Activator: com.gzydt.bundle.target.client.info.Activator
+Bundle-Vendor: 广州市宇阳数码科技有限公司
+Bundle-Version: 1.0.0
+Provide-Capability:org.apache.felix.webconsole
+Import-Package: \
+	groovy.lang;resolution:=optional,\
+	javax.servlet;resolution:=optional,\
+	org.osgi.util.tracker;resolution:=optional,\
+	javax.servlet.http;resolution:=optional,\
+	junit.framework;resolution:=optional,\
+	nu.xom;resolution:=optional,\
+	org.apache.avalon.framework.logger;resolution:=optional,\
+	org.apache.felix.dm.tracker;resolution:=optional,\
+	org.apache.log;resolution:=optional,\
+	org.apache.log4j;resolution:=optional,\
+	org.apache.oro.text.regex;resolution:=optional,\
+	org.codehaus.groovy.reflection;resolution:=optional,\
+	org.codehaus.groovy.runtime;resolution:=optional,\
+	org.codehaus.groovy.runtime.callsite;resolution:=optional,\
+	org.codehaus.groovy.runtime.typehandling;resolution:=optional,\
+	org.codehaus.groovy.runtime.wrappers;resolution:=optional,\
+	org.osgi.framework;resolution:=optional,\
+	org.osgi.service.http;resolution:=optional,\
+	*
+

@@ -1,0 +1,42 @@
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+  		http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+	<persistence-unit name="testPersistent" transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+		<jta-data-source>
+			<![CDATA[
+			osgi:javax.sql.DataSource/(name=usimDS2)
+			]]>
+		</jta-data-source>
+
+		<class>com.gzydt.bundle.database.vo.JpaBridgeManager</class>
+		<class>com.gzydt.bundle.database.vo.JpaBridgeManager2</class>
+
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+
+			<!-- 是否需要进行数据库结构管理,"数据库结构管理组件"基于 Flyway 技术实现，关于升级脚本（或类）的写法可参考相关文档 -->
+			<!-- <property name=" com.gzydt.database.schema.enabled" value="false" /> -->
+			<!-- 指定升级脚本的位置 -->
+			<!-- <property name="com.gzydt.database.schema.locations" value="" /> -->
+
+			<property name="org.amdatu.jpa.allowNonTransactionalEntityManagerAccess"
+				value="true" />
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+			<property name="eclipselink.logging.level" value="FINEST" />
+			<property name="eclipselink.logging.level.sql" value="FINEST" />
+			<!-- <property name="eclipselink.logging.file" value="logs/output.log" /> -->
+			<property name="eclipselink.logging.parameters" value="true" />
+			<property name="eclipselink.show_sql" value="true" />
+			<property name="eclipselink.orm.throw.exceptions" value="true" />
+			<property name="eclipselink.query-results-cache" value="false" />
+			<property name="eclipselink.cache.shared.default" value="false" />
+			<property name="eclipselink.weaving" value="static" />
+		</properties>
+	</persistence-unit>
+
+</persistence> 

@@ -1,0 +1,12 @@
+Bundle-Activator: one_to_many.Activator
+Private-Package: one_to_many
+
+Include-Resource:  \
+	META-INF/persistence.xml=persistence/persistence.xml,\
+	conf
+	
+Meta-Persistence: META-INF/persistence.xml
+
+X-Web-Resource: serverInfo/update
+#X-Web-Resource-Default-Page: default.html, /my/=default.html
+X-Web-Resource-Version: 1.1

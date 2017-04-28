@@ -1,0 +1,118 @@
+<script type="text/javascript"
+	src="${pluginRoot}/res/js/metadata_resource.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/plugin/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/plugin/validate.message.cn.js"></script>
+<div>
+    <div class="list-group col-xs-2 ">
+      <a href="${pluginRoot}/metadata" class="list-group-item glyphicon glyphicon-tags">&nbsp;元数据</a>
+	  <a href="${pluginRoot}/metadata_base" class="list-group-item">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;基础元数据</a>
+	  <a href="${pluginRoot}/metadata_type" class="list-group-item">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;类型元数据</a>
+	  <a href="#" class="list-group-item  active">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;资源元数据</a>
+    </div>
+	<div class="col-xs-10">
+		<button type="button" class="btn btn-primary glyphicon glyphicon-plus"
+			data-toggle="modal" data-target="#baseMeta_Info" onclick="ininMetaDate()">新增元数据</button>
+		<table class="table table-hover" style="margin-top: 10px">
+			<thead>
+				<tr>
+					<td class="active">编号</td>
+					<td class="success">名称</td>
+					<td class="warning">类型</td>
+					<td class="danger">作者</td>
+					<td class="info">资源类型</td>
+					<td class="active">状态</td>
+					<td class="success">描述</td>
+					<td class="warning">操作</td>
+				</tr>
+			</thead>
+			<tbody id="base_list">
+				<tr>
+				</tr>
+			</tbody>
+			<tfoot>
+			  <tr>
+			    <td colspan="8">
+			      <div style="float: right;">
+					   <nav>  
+					       <ul class="pagination" id="pageUL" style="padding: 0px;margin: 0px;"></ul>
+					       <div style="float:right;margin-left:20px;margin-top: 8px">
+			        	     <span class="pgo">跳转<input type="text" style="width:30px;height:20px" id="goValu">页</span>
+			        	     <a href="#" class="pbtn" id="go">GO</a>
+			        	   </div>  
+					   </nav>  
+			        </div> 
+			    </td>
+			  </tr>
+			</tfoot>
+		</table>
+		
+	</div>
+</div>
+
+<!-- --------------------------------------------------------------------------- -->
+<div class="modal fade bs-example-modal-lg" id="baseMeta_Info"
+	tabindex="-1" role="dialog" aria-labelledby="baseMetaLabel"
+	aria-hidden="false">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="baseMetaLabel">资源元数据信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-inline" id="resourceMetaDataForm">
+				    <div><p id="emsg" style="color:red;font-weight: bold;padding-left: 30px"><p></div>
+					<div class="form-group">
+						<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">*</span>编号：</label> <input type="text" size="40"
+							class="form-control required" id="metadataId" name="metadataId"
+							placeholder="File001">
+					</div>
+					<div class="form-group">
+						<label>&nbsp;&nbsp;<span style="color:red">*</span>名称：</label> <input type="text" size="40"
+							class="form-control required" id="metadataName" name="metadataName"
+							placeholder="测试文件资源">
+					</div>
+					<div class="form-group">
+						<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">*</span>类型：</label> <input type="text" size="40"
+							class="form-control required" id="metadataType" name="metadataType"
+							placeholder="测试类型">
+					</div>
+					<div class="form-group">
+						<label>&nbsp;&nbsp;&nbsp;作者：</label> <input type="text" size="40"
+							class="form-control" id="metadataauthor" placeholder="李计达">
+					</div>
+					<div class="form-group">
+						<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;状态：</label> <select id="metadataState" class="form-control">
+							<option value="1">启用</option>
+							<option value="0">停用</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;描述：</label>
+						<textarea class="form-control" id="metadataDesc" rows="5"
+							cols="96" placeholder="这是一个描述文件资源的元数据"></textarea>
+					</div>
+					<div class="form-group">
+						<label>资源类型：</label>
+						<select id="metadataRType" class="form-control">
+							<option value="0">数据库</option>
+							<option value="1">文件</option>
+							<option value="2">内存</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label><span style="color:red">*</span>资源位置：</label> 
+						<select id="metadataRPath" class="form-control">
+						</select>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" onclick="saveOrUpdate()">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>

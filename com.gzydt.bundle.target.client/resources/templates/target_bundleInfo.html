@@ -1,0 +1,106 @@
+<link href="${pluginRoot}/res/css/target.css" rel="stylesheet"
+	type="text/css" />
+<link href="${pluginRoot}/res/css/datetimepicker.css" rel="stylesheet"
+	type="text/css" />	
+<script type="text/javascript" src="${pluginRoot}/res/js/target_bundleInfo.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/util/page.js"></script>
+<script src="${pluginRoot}/res/js/bootstrap-datetimepicker.min.js"></script>
+<div>
+<ul class="nav nav-tabs" role="tablist">
+	<li role="presentation"><a href="${pluginRoot}/target_fnMarket">组件仓库</a></li>
+	<li role="presentation"><a href="${pluginRoot}/target_info">容器信息</a></li>
+	<li role="presentation"><a href="${pluginRoot}/target_serverInfo">服务器信息 <span class="badge" id="errorNum"></span></a></li>
+	<li role="presentation" class="active"><a href="#">组件信息</a></li>
+</ul>
+<div class="container-fluid" >
+<div class="row">
+  <div class="col-md-2">
+    <h5>已安装列表</h5>
+	<ul class="list-group" id="systemList">
+	  <li class="list-group-item" id="0" onclick="selectSystem(1,'0')" >
+	    <span class='badge'>0.0.0</span>
+	              容器默认初始化系统
+	  </li>
+	</ul>
+  </div>
+  <div class="col-md-10">
+    <div style="margin: 5px">
+	<form class="form-inline" role="form" style="width:80%;float: left" onkeypress="keySearch()">
+	   <div class="form-group">
+	    <label>组件名称：</label>
+	    <input type="text" class="form-control" id="e_bundleName" placeholder="组件名称">
+	   </div>
+	   <div class="form-group">
+	    <label>组件状态：</label>
+	    <select class="form-control" id="e_state">
+	      <option value="">全部</option>
+	      <option value="已安装">已安装</option>
+	      <option value="已编译">已编译</option>
+	      <option value="未安装">未安装</option>
+	      <option value="启动中">启动中</option>
+	      <option value="激活">激活</option>
+	      <option value="停止中">停止中</option>
+	    </select>
+	   </div>
+	   <div class="form-group" >
+	    <label>组件类型：</label>
+	    <select class="form-control" id="e_type" >
+	      <option value="">全部</option>
+	      <option value="true">系统组件</option>
+	      <option value="false">安装组件</option>
+	    </select>
+	   </div>
+	   <div class="form-group" >
+	    <label>安装时间：</label>
+	    <input type="text" class="form-control form_datetime"  placeholder="开始时间" id="e_startTime" type="text">~
+	    <input type="text" class="form-control form_datetime"  placeholder="结束时间" id="e_endTime">
+	  </div>
+	</form>
+	<button class="btn btn-default" style="margin-top: 2px" id="search">搜索</button>
+	<font style="float:right">当前所有组件数目：<span id="bundleTotalNum">0</span></font >
+    </div>
+	<table id="bundle_table" class="table tablesorter nicetable noauto">
+		<thead>
+			<tr>
+			    <th>Id</th>
+			    <th class="info"><img src="${pluginRoot}/res/image/类型.png"/></th>
+				<th class="warning">名称</th>
+				<th class="danger"><img src="${pluginRoot}/res/image/状态.png"/></th>
+				<th>版本</th>
+				<th class="info css2">描述</th>
+				<th class="info">安装时间</th>
+			</tr>
+		</thead>
+		<tbody id="bundle_list">
+		</tbody>
+	</table>
+     <div style="float: right;">
+	   <nav>  
+	       <ul class="pagination" id="pageUL"></ul>  
+	   </nav>  
+    </div> 
+    <script type="text/javascript">
+        $("#e_startTime").datetimepicker( {format: "yyyy-mm-dd",
+                startView: "2",
+                minView: "month",
+                todayBtn: true,
+                autoclose:true,
+                });
+        $("#e_endTime").datetimepicker( {format: "yyyy-mm-dd",
+            startView: "2",
+            minView: "month",
+            todayBtn: true,
+            autoclose:true,
+            });
+    </script>      
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+                          

@@ -1,0 +1,18 @@
+Is_SystemBundle : false
+Bundle-Category: 开发组件
+Bundle-Name: 服务器关于容器界面组件
+Bundle-Description: 注册下载节点容器界面组件
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-SymbolicName: com.gzydt.bundle.target.server.webconsole
+Bundle-Vendor: 广州市宇阳数码科技有限公司
+Include-Resource: resources/
+Private-Package: com.gzydt.bundle.target.server.webconsole
+Bundle-Activator: com.gzydt.bundle.target.server.webconsole.Activator
+Import-Package: \
+	com.gzydt.gjzh.webconsole;resolution:=optional,\
+	javax.servlet;resolution:=optional,\
+	javax.servlet.http;resolution:=optional,\
+	org.apache.felix.webconsole;resolution:=optional,\
+	org.osgi.framework;resolution:=optional,\
+	*
+Bundle-Version: 1.0.0

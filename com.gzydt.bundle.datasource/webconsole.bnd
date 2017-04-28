@@ -1,0 +1,13 @@
+Private-Package: com.gzydt.bundle.datasource.webconsole
+Bundle-Activator: com.gzydt.bundle.datasource.webconsole.Activator
+Include-Resource: resources/
+Import-Package: \
+	javax.servlet;resolution:=optional,\
+	javax.servlet.http;resolution:=optional,\
+	org.apache.felix.webconsole;resolution:=optional,\
+	org.osgi.framework;resolution:=optional,\
+	*;resolution:=optional
+Bundle-Version: 1.0.0
+Bundle-Category: 数据库类
+Bundle-Vendor: 广州市宇阳数码科技有限公司
+Bundle-Description: 数据库管理webconsole前端组件

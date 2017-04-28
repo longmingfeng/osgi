@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" localization="OSGI-INF/metatype/metatype">
+<OCD description="这是一个系统配置" id="com.gzydt.metatype.testconfig" name="testconfig系统配置">
+<AD default="123" description="用户初始化密码" id="system.user.password" index="3" name="用户初始化密码" required="false" row="6" showTip="false" type="String"/>
+<AD default="1,2" description="系统模块选择" id="system.modules" index="3" name="选择可使用的模块" required="false" row="6" showTip="false" type="String"/>
+<AD default="" description="系统初始化账号" id="system.user.names" index="3" name="系统初始化账号" required="false" row="6" showTip="false" type="String"/>
+<AD default="" description="seesion超时时间(S)" id="system.timeout" index="3" name="seesion超时时间(S)" required="true" row="6" showTip="false" type="Long"/>
+<AD default="true" description="是否定时删除系统缓存" id="system.cache.delete" index="4" name="是否定时删除系统缓存" required="true" row="6" showTip="false" type="Boolean"/>
+<AD default="debug" description="选择日志等级" id="system.log.level" index="12" name="日志等级" required="true" row="6" showTip="false" type="String"/>
+<AD default="描述" description="系统描述" id="system.descr" index="12" name="系统描述" required="false" row="12" showTip="false" type="String"/>
+</OCD>
+</metatype:MetaData>

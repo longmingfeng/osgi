@@ -1,0 +1,75 @@
+<script type="text/javascript" src="${pluginRoot}/res/js/metadata.js"></script>
+<div>
+   <div class="list-group col-xs-2 ">
+      <a href="#" class="list-group-item glyphicon glyphicon-tags active">&nbsp;元数据</a>
+	  <a href="${pluginRoot}/metadata_base" class="list-group-item">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;基础元数据</a>
+	  <a href="${pluginRoot}/metadata_type" class="list-group-item">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;类型元数据</a>
+	  <a href="${pluginRoot}/metadata_resource" class="list-group-item">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;资源元数据</a>
+   </div>
+   <div class="col-xs-10">
+     <h4 style="vertical-align: middle;">元数据列表
+     <button style="margin-bottom: 5px;float: right" class="btn btn-primary btn-sm glyphicon glyphicon-search" onclick="showSearch()" id="searchList_btn">展开搜索列表</button>
+     </h4>
+     <div id="searchInfo" style="display:none">
+          <table class="table">
+          <tr>
+            <td style="text-align: right;width:100px">已选条件：</td>
+            <td colspan="4" id="selectedCondition">
+                 <button id="belongType" class="btn-danger btn-xs" style="display:none"></button>
+                 <button id="isStop" class="btn-danger btn-xs" style="display:none"></button>
+                 <button id="keyWord_btn" class="btn-danger btn-xs" style="display:none"></button>
+            </td>
+          </tr>
+	      <tr>
+	        <td style="text-align: right;width:100px">所属元数据：</td>
+	        <td style="width:150px"><a href="#" onclick="searchMetaData('基础元数据')">基础元数据</a></td>
+	        <td style="width:150px"><a href="#" onclick="searchMetaData('类型元数据')">类型元数据</a></td>
+	        <td style="width:150px"><a href="#" onclick="searchMetaData('资源元数据')">资源元数据</a></td>
+	        <td></td>
+	      </tr>
+	      <tr>
+	        <td style="text-align: right">状态：</td>
+	        <td><a href="#" onclick="searchMetaData('启用')">启用</a></td>
+	        <td><a href="#" onclick="searchMetaData('停用')">停用</a></td>
+	        <td></td>
+	        <td></td>
+	      </tr>
+	      <tr>
+	        <td style="text-align: right;vertical-align: middle;">关键字：</td>
+	        <td colspan="3"><input type="text" id="keyword" class="form-control" placeholder="请输入编号、名称、描述的关键字"  /></td>
+	        <td style="vertical-align: middle;"><button class="btn-primary glyphicon glyphicon-search btn-sm" onclick="searchMetaData('')">搜索</button></td>
+	        </tr>
+	      </table>
+     </div>
+     <table class="table table-hover">
+			<thead>
+				<tr>
+					<td class="active">编号</td>
+					<td class="success">名称</td>
+					<td class="warning">类型</td>
+					<td class="danger">作者</td>
+					<td class="info">状态</td>
+					<td class="active">描述</td>
+					<td class="success">所属元数据</td>
+				</tr>
+			</thead>
+			<tbody id="list">
+			</tbody>
+			<tfoot>
+			  <tr>
+			    <td colspan="7">
+			      <div style="float: right;">
+					   <nav>  
+					       <ul class="pagination" id="pageUL" style="padding: 0px;margin: 0px;"></ul>
+					       <div style="float:right;margin-left:20px;margin-top: 8px">
+			        	     <span class="pgo">跳转<input type="text" style="width:30px;height:20px" id="goValu">页</span>
+			        	     <a href="#" class="pbtn" id="go">GO</a>
+			        	   </div>  
+					   </nav>  
+			        </div> 
+			    </td>
+			  </tr>
+			</tfoot>
+		</table>
+   </div>
+</div>

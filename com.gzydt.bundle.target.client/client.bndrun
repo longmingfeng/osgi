@@ -1,0 +1,51 @@
+-runfw: org.apache.felix.framework;version='[5.6.1,5.6.1]'
+-runee: JavaSE-1.8
+-runsystemcapabilities: ${native_capability}
+
+-runproperties: \
+	org.osgi.service.http.port=8082,\
+	launch.keep=true,\
+	launch.storage.dir=bundle-cache,\
+	org.apache.felix.log.maxSize=1000,\
+	org.apache.felix.log.storeDebug=true,\
+	org.apache.felix.eventadmin.Timeout=0,\
+	org.apache.felix.deploymentadmin.stopunaffectedbundle=false,\
+	agent.logging.level=DEBUG,\
+	agent.identification.agentid=target-1,\
+	agent.discovery.serverurls=http://localhost:8080,\
+	agent.controller.syncinterval=10,\
+	agent.controller.streaming=true,\
+	agent.controller.retries=1,\
+	agent.controller.fixpackages=true,\
+	agent.controller.syncdelay=5,\
+	target.default.sum=12
+
+-runbundles: \
+	com.gzydt.bundle.target.client.info;version=latest,\
+	org.apache.felix.gogo.runtime;version='[0.16.2,0.16.2]',\
+	org.apache.felix.gogo.shell;version='[0.12.0,0.12.0]',\
+	org.apache.felix.gogo.command;version='[0.16.0,0.16.0]',\
+	org.apache.felix.http.jetty,\
+	org.apache.felix.http.servlet-api,\
+	org.apache.felix.http.api,\
+	osgi.cmpn;version='[5.0.0,5.0.1)',\
+	org.apache.felix.configadmin;version=1.8.8,\
+	org.apache.felix.dependencymanager,\
+	org.apache.felix.dependencymanager.shell,\
+	org.apache.ace.agent;version=2.0.7,\
+	com.gzydt.gjzh.configuration;version=latest,\
+	com.gzydt.gjzh.metatype;version=latest,\
+	com.gzydt.kjzh.obr.metadata;version=latest,\
+	com.gzydt.kjzh.obr.servlet;version=latest,\
+	com.gzydt.kjzh.obr.storage;version=latest,\
+	com.gzydt.kjzh.obr.ui;version=latest,\
+	com.gzydt.gjzh.webconsole;version=latest,\
+	com.gzydt.bundle.target.client.webconsole;version=latest
+
+
+-runrepos: \
+	Workspace,\
+	Amdatu Dependencies,\
+	Amdatu Release,\
+	Local,\
+	Release

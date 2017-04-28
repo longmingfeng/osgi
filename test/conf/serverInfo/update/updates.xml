@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updateDescriptor baseUrl="">
+  <entry targetMediaFileId="30" updatableVersionMin="" updatableVersionMax="" fileName="target客户端_windows_1_0_1.exe" newVersion="1.0.1" newMediaFileId="30" fileSize="46105600" bundledJre="windows-x86-1.8.0_121" archive="false">
+    <comment language="zh_CN" />
+  </entry>
+</updateDescriptor>

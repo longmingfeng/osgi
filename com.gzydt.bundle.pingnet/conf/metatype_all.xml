@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0" >
+
+	<OCD description="metatype测试1" name="metatype_test1" id="metatype_test1">
+		<AD name="testA1" id="testA1" type="String" default="C:/works/"/>
+		<AD name="testB1" id="testB1" type="String"  default="C:/works/xmldata/"/>
+	</OCD>
+	<OCD description="metatype测试2" name="metatype_test2" id="metatype_test2">
+		<AD name="testA2" id="testA2" type="String" default="C:/works/"/>
+		<AD name="testB2" id="testB2" type="String"  default="C:/works/xmldata/"/>
+	</OCD>
+
+	<Designate pid="metatype_test1">
+		<Object ocdref="metatype_test1">
+			<Attribute adref="testA1">
+				<Value>${context.testA1}</Value>
+			</Attribute>
+			<Attribute adref="testB1">
+				<Value>${context.testB1}</Value>
+			</Attribute>
+		</Object>
+	</Designate>
+	
+	<Designate pid="metatype_test2">
+		<Object ocdref="metatype_test2">
+			<Attribute adref="testA2">
+				<Value>${context.testA2}</Value>
+			</Attribute>
+			<Attribute adref="testB2">
+				<Value>${context.testB2}</Value>
+			</Attribute>
+		</Object>
+	</Designate>
+
+</metatype:MetaData>

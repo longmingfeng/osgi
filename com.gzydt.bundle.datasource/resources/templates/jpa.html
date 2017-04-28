@@ -1,0 +1,35 @@
+<script type="text/javascript" src="${pluginRoot}/res/js/jpa.js"></script>
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation"><a href="${pluginRoot}/datasource">数据源列表信息</a></li>
+  <li role="presentation" class="active"><a href="#">持久化实体信息</a></li>
+  <li role="presentation"><a href="${pluginRoot}/driver">驱动列表信息</a></li>
+</ul>
+<div class="container-fluid" id="bundle_list" style="margin-top: 10px">
+</div>
+
+<div class="modal fade" id="columnModal" tabindex="-1" role="dialog" aria-labelledby="columnModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="columnModalLabel">实体类列持久化信息</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table tablesorter nicetable noauto">
+			 <thead>
+			    <tr>
+			      <td>序号</td>
+			      <td>列名</td>
+			      <td>类型</td>
+			    </tr>
+			 </thead>
+			 <tbody id="column_list">
+		     </tbody>
+		  </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"  data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>

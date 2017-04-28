@@ -1,0 +1,17 @@
+Include-Resource:  \
+	META-INF/persistence.xml=persistence/persistence.xml,\
+	load=load,\
+	persistence=persistence
+	
+Meta-Persistence: META-INF/persistence.xml
+Private-Package: \
+	com.gzydt.bundle.metadatamanage.info,\
+	com.gzydt.bundle.metadatamanage.info.jpa,\
+	com.gzydt.bundle.metadatamanage.info.rest
+Bundle-Activator: com.gzydt.bundle.metadatamanage.info.Activator
+Export-Package: \
+	com.gzydt.bundle.metadatamanage.info.api,\
+	com.gzydt.bundle.metadatamanage.info.util
+
+Bundle-Version: 1.0.0
+Bundle-Description: 对元数据的管理

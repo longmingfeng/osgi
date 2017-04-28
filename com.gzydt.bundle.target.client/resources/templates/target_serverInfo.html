@@ -1,0 +1,22 @@
+<link href="${pluginRoot}/res/css/target.css" rel="stylesheet"
+	type="text/css" />
+<script type="text/javascript" src="${pluginRoot}/res/js/target_serverInfo.js"></script>
+<ul class="nav nav-tabs" role="tablist">
+	<li role="presentation"><a href="${pluginRoot}/target_fnMarket">组件仓库</a></li>
+	<li role="presentation"><a href="${pluginRoot}/target_info">容器信息</a></li>
+	<li role="presentation" class="active"><a href="#">服务器信息 <span class="badge" id="errorNum"></span></a></li>
+	<li role="presentation"><a href="${pluginRoot}/target_bundleInfo">组件信息</a></li>
+</ul>
+<div class="alert alert-danger" role="alert" id="errorInfo" style="display: none">
+</div>
+<div class="panel panel-info" style="font-size: 14px">
+  <div class="panel-footer">
+    <p>服务器名称：<span id="serverName"></span></p>
+    <p>服务器地址：<span id="serverAdd"></span></p>
+    <p>服务器负责人：<span id="principal"></span></p>
+    <p>服务器负责人电话：<span id="phone"></span></p>
+    <p>服务器负责人邮箱：<span id="email"></span></p>
+    <p>描述：<span id="descript"></span></p>
+    <p>状态：<span id="state"></span></p>
+  </div>
+</div>

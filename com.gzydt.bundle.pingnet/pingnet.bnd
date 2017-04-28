@@ -1,0 +1,51 @@
+Include-Resource:  \
+	lib=lib,\
+	conf=conf,\
+	OSGI-INF/metatype/metatype_all.xml=conf/metatype_all.xml
+	
+Bundle-ClassPath: .,\
+	lib/commons-logging-1.1.1.jar,\
+	lib/json-lib-2.4-jdk15.jar,\
+	lib/commons-lang-2.6.jar,\
+	lib/commons-beanutils-1.7.0.jar,\
+	lib/ezmorph-1.0.6.jar,\
+	lib/commons-collections-3.1.jar
+	
+-classpath:.,\
+	lib/commons-logging-1.1.1.jar,\
+	lib/json-lib-2.4-jdk15.jar,\
+	lib/commons-lang-2.6.jar,\
+	lib/commons-beanutils-1.7.0.jar,\
+	lib/ezmorph-1.0.6.jar,\
+	lib/commons-collections-3.1.jar
+	
+Bundle-Activator: com.gzydt.bundle.pingnet.socket.Activator
+Bundle-Name: target运行组件详情
+Bundle-Description: 获取target运行的组件相关信息
+Private-Package: com.gzydt.bundle.pingnet.socket
+Is_SystemBundle : false
+Import-Package: \
+	javax.servlet;resolution:=optional,\
+	org.json;resolution:=optional,\
+	org.osgi.service.metatype;resolution:=optional,\
+	com.gzydt.bundle.util.metatype;resolution:=optional,\
+	net.sf.json;resolution:=optional,\
+	org.osgi.util.tracker;resolution:=optional,\
+	groovy.lang;resolution:=optional,\
+	junit.framework;resolution:=optional,\
+	nu.xom;resolution:=optional,\
+	org.apache.avalon.framework.logger;resolution:=optional,\
+	org.apache.log;resolution:=optional,\
+	org.apache.log4j;resolution:=optional,\
+	org.apache.oro.text.regex;resolution:=optional,\
+	org.codehaus.groovy.reflection;resolution:=optional,\
+	org.codehaus.groovy.runtime;resolution:=optional,\
+	org.codehaus.groovy.runtime.callsite;resolution:=optional,\
+	org.codehaus.groovy.runtime.typehandling;resolution:=optional,\
+	org.codehaus.groovy.runtime.wrappers;resolution:=optional,\
+	javax.servlet.http;resolution:=optional,\
+	org.apache.felix.dm.tracker;resolution:=optional,\
+	org.osgi.framework;resolution:=optional,\
+	org.osgi.service.http;resolution:=optional,\
+	*
+Bundle-Version: 1.0.0

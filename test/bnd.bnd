@@ -1,0 +1,31 @@
+# Example Project Template
+# Make sure to edit the name, category and help document.
+
+-resourceonly: true
+
+Include-Resource: \
+	lib=lib
+
+-buildpath: \
+	xstream,\
+	org.apache.felix.http.servlet-api,\
+	osgi.core;version=6.0,\
+	osgi.cmpn;version='[5.0.0,5.0.1)',\
+	org.apache.felix.http.api,\
+	org.apache.felix.dependencymanager,\
+	org.apache.felix.dependencymanager.runtime,\
+	org.amdatu.persistence2_0;version='[1.0.1,1.0.1]',\
+	com.gzydt.gjzh.webconsole;version=2.0,\
+	com.gzydt.bundle.persistence.daoutil;version=latest,\
+	com.gzydt.logging.service.log4j2.extend,\
+	com.zaxxer.HikariCP,\
+	com.datastax.driver.core,\
+	com.dbschema,\
+	org.amdatu.web.resourcehandler,\
+	org.eclipse.persistence.antlr,\
+	org.eclipse.persistence.asm,\
+	org.eclipse.persistence.core,\
+	org.eclipse.persistence.jpa,\
+	org.eclipse.persistence.jpa.jpql
+	
+-sub: *.bnd

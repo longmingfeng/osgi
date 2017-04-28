@@ -1,0 +1,11 @@
+-buildpath: \
+	org.apache.felix.framework;version=5.6,\
+	osgi.cmpn;version=5.0,\
+	org.apache.felix.dependencymanager;version=4.1,\
+	org.apache.felix.http.servlet-api;version=1.1,\
+	com.gzydt.gjzh.webconsole;version=1.1,\
+	com.gzydt.database.schema,\
+	json;version=20140107.0,\
+	org.amdatu.persistence2_0
+-sub: *.bnd
+-dsannotations: 

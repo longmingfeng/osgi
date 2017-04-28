@@ -1,0 +1,188 @@
+<link href="${pluginRoot}/res/css/target.css" rel="stylesheet"
+	type="text/css" />
+<script type="text/javascript" src="${pluginRoot}/res/js/target_info.js"></script>
+<ul class="nav nav-tabs" role="tablist">
+	<li role="presentation"><a href="${pluginRoot}/target_fnMarket">组件仓库</a></li>
+	<li role="presentation" class="active"><a href="#">容器信息</a></li>
+	<li role="presentation"><a href="${pluginRoot}/target_serverInfo">服务器信息
+			<span class="badge" id="errorNum"></span>
+	</a></li>
+	<li role="presentation"><a href="${pluginRoot}/target_bundleInfo">组件信息</a></li>
+</ul>
+<div>
+	<div class="panel panel-info" style="font-size: 14px;width: 50%;float:left;">
+	    <h4 style="margin-left: 5px">容器基本信息</h4>
+		<p style="float: right; margin-right: 10px">
+			<button class="btn btn-primary btn-xs" data-toggle="modal"
+				data-target="#target_info" onclick="changeInfo()">
+				<span class="glyphicon glyphicon-pencil"></span>修改基本信息
+			</button>
+		</p>
+		<div class="panel-footer">
+			<p>容器名称：<span id="targetName"></span></p>
+			<p>容器所属单位：<span id="targetOrg"></span></p>
+			<p>容器负责人：<span id="principal"></span></p>
+			<p>容器负责电话：<span id="phone"></span></p>
+			<p>容器负责人邮箱：<span id="email"></span></p>
+			<p>描述：<span id="descript"></span></p>
+			<p>当前版本号：<span id="version"></span></p>
+			<p>最后更新时间：<span id="updateTime"></span></p>
+		</div>
+	</div>
+	<div class="panel panel-primary" style="font-size: 14px;width: 50%;float:left;">
+	    <h4 style="margin-left: 5px">容器配置信息</h4>
+		<p style="float: right; margin-right: 10px">
+			<button class="btn btn-primary btn-xs" data-toggle="modal"
+				data-target="#target_propInfo" onclick="changeProp()">
+				<span class="glyphicon glyphicon-pencil"></span>修改配置信息
+			</button>
+		</p>
+		<div class="panel-footer" style="height: 260px">
+		  <p>日志级别：<span id="log_level"></span></p>
+		  <p>同步间隔(秒)：<span id="syncinterval"></span></p>
+		  <p>同步延迟(秒)：<span id="syncdelay"></span></p>
+		  <p>控制流：<span id="streaming"></span></p>
+		  <p>控制固定包：<span id="fixpackages"></span></p>
+		  <p>重试安装(次)：<span id="retries"></span></p>
+		</div>
+	</div>
+</div>
+<div class="modal fade " id="target_info" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">修改容器基本信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-4 control-label"><span style="color:red">*</span>容器名称：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editTargetName">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label"><span style="color:red">*</span>容器所属单位：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editTargetOrg">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label"><span style="color:red">*</span>容器负责人：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editPrincipal">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label"><span style="color:red">*</span>容器负责电话：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editPhone">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">容器负责人邮箱：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editEmail">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">描述：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editDescript">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">当前版本号：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editVersion" value="无"
+								readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">最后更新时间：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="editUpdateTime"
+								value="2016-11-07 09:00:00" readonly="readonly">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-default"  onclick="submitTargetInfo()" >提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade " id="target_propInfo" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">容器配置信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">日志级别：</label>
+						<div class="col-sm-8">
+							<select class="form-control" id="edit_log_level">
+							  <option value="INFO">INFO</option>
+							  <option value="DEBUG">DEBUG</option>
+							  <option value="WARNING">WARNING</option>
+							  <option value="ERROR">ERROR</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">同步间隔(秒)：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit_syncinterval">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">同步延迟(秒)：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit_syncdelay">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">控制流：</label>
+						<div class="col-sm-8">
+							<select class="form-control" id="edit_streaming">
+							  <option value="true">true</option>
+							  <option value="false">false</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">控制固定包：</label>
+						<div class="col-sm-8">
+							<select class="form-control" id="edit_fixpackages">
+							  <option value="true">true</option>
+							  <option value="false">false</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">重试安装(次)：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit_retries" >
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="submitTargetProp()" >提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>

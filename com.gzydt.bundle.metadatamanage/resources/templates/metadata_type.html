@@ -1,0 +1,349 @@
+<script type="text/javascript" src="${pluginRoot}/res/js/metadata_type.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/plugin/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${pluginRoot}/res/js/plugin/validate.message.cn.js"></script>
+<div>
+   <div class="list-group col-xs-2 ">
+      <a href="${pluginRoot}/metadata" class="list-group-item glyphicon glyphicon-tags">&nbsp;元数据</a>
+	  <a href="${pluginRoot}/metadata_base" class="list-group-item">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;基础元数据</a>
+	  <a href="#" class="list-group-item active">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;类型元数据</a>
+	  <a href="${pluginRoot}/metadata_resource" class="list-group-item">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span>&nbsp;资源元数据</a>
+   </div>
+   <div class="col-xs-10">
+     <button type="button"
+				class="btn btn-primary glyphicon glyphicon-plus" data-toggle="modal"
+				data-target="#baseMeta_Info" onclick="ininMetaDate()">新增元数据</button>
+	 <button type="button"
+				class="btn btn-primary glyphicon glyphicon-share" data-toggle="modal"
+				data-target="#getBaseMeta_Info" onclick="ininMetaDate()">提取元数据</button>
+     <table class="table table-hover" style="margin-top: 10px">
+			<thead>
+				<tr>
+					<td class="active">表名</td>
+					<td class="success">名称</td>
+					<td class="warning">部门</td>
+					<td class="danger">所属分类</td>
+					<td class="info">作者</td>
+					<td class="active">状态</td>
+					<td class="success">描述</td>
+					<td class="warning">操作</td>
+				</tr>
+			</thead>
+			<tbody id="base_list">
+			</tbody>
+			<tfoot>
+			 <tr>
+			  <td colspan="8">
+			    <div style="float: right;">
+				   <nav>  
+				       <ul class="pagination" id="pageUL" style="padding: 0px;margin: 0px;"></ul>
+				       <div style="float:right;margin-left:20px;margin-top: 8px">
+		        	     <span class="pgo">跳转<input type="text" style="width:30px;height:20px" id="goValu">页</span>
+		        	     <a href="#" class="pbtn" id="go">GO</a>
+		        	   </div>  
+				   </nav>  
+		        </div> 
+			  </td>
+			 </tr>
+			</tfoot>
+		</table>
+   </div>
+</div>
+
+<!-- --------------------------------------------------------------------------- -->
+<div class="modal fade bs-example-modal-lg" id="baseMeta_Info" tabindex="-1" role="dialog"
+	aria-labelledby="baseMetaLabel" aria-hidden="false">
+	<div class="modal-dialog" style="width:1100px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="baseMetaLabel">类型元数据信息</h4>
+			</div>
+			<div class="modal-body">
+			      <ul class="nav nav-tabs" style="padding: 0px;margin: 0px">
+					  <li role="presentation" id="basicFormInfoLi" class="active" onClick="changeFormInfo(1)" ><a href="#">基本信息</a></li>
+					  <li role="presentation" id="customizeInfoLi" onClick="changeFormInfo(2)"><a href="#">自定义信息</a></li>
+					  <li role="presentation" id="fieldFormInfoLi" onClick="changeFormInfo(0)"><a href="#">字段信息</a></li>
+				  </ul>
+				  <div id="basicFormInfoDiv">
+					  <form class="form-inline" id="typeMetaDataForm">
+					    <div><p id="emsg" style="color:red;font-weight: bold;padding-left: 30px"><p></div>
+					    <div class="form-group">
+						    <label style="text-align: right">&nbsp;&nbsp;<span style="color:red">*</span>编号：</label>
+						    <input type="text" size="55"  class="form-control required" id="metadataId" name="metadataId" placeholder="001">
+						</div>
+						<div class="form-group">
+						    <label style="text-align: right">&nbsp;<span style="color:red">*</span>表名：</label>
+						    <input type="text" size="55"  class="form-control required" id="tableName" name="tableName" placeholder="T290AA_A320BA">
+						</div>
+						<div class="form-group">
+						    <label>&nbsp;&nbsp;<span style="color:red">*</span>名称：</label>
+						    <input type="text" size="55"  class="form-control required" id="metadataName" name="metadataName" placeholder="测试业务类">
+						</div>
+						<div class="form-group">
+						    <label>&nbsp;&nbsp;部门：</label>
+						    <input type="text" size="55"  class="form-control" id="metadataOrg" placeholder="基础研发部">
+						</div>
+						<div class="form-group">
+						    <label>&nbsp;&nbsp;&nbsp;作者：</label>
+						    <input type="text" size="55"  class="form-control" id="metadataauthor" placeholder="李计达">
+						</div>
+						<div class="form-group">
+						    <label>&nbsp;&nbsp;状态：</label>
+						    <select id="metadataState" class="form-control">
+						      <option value="1">启用</option>
+						      <option value="0">停用</option>
+						    </select>
+						</div>
+						<div class="form-group">
+						    <label>对应资源元数据：</label>
+						    <select id="metadataResource" class="form-control">
+						    </select>
+						</div>
+						<div class="form-group">
+						    <label>&nbsp;&nbsp;&nbsp;描述：</label>
+						    <textarea  class="form-control" id="metadataDesc" rows="7" cols="116" placeholder="这是一个测试的业务类"></textarea>
+						</div>
+						<div class="form-group">
+						    <label>&nbsp;&nbsp;<span style="color:red">*</span>分类：</label>
+						    <input type="text" size="40"  class="form-control required" id="metadataType" name="metadataType" placeholder="所属分类">
+						</div>
+					  </form>
+				  </div>
+				  <div id="customizeInfoDiv" style="display:none">
+					  <div>
+					  <div style="float:left;"></div>
+					     <div style="float:right;margin-bottom: 5px;">
+						  <button type="button"class="btn btn-primary btn-sm" onclick="addKey()"><span class="glyphicon glyphicon-plus"></span></button>
+						  <button type="button"class="btn btn-primary btn-sm" onclick="removeKey()"><span class="glyphicon glyphicon-minus"></span></button>
+					  </div>
+					  </div>
+					  <form role="form" id="customizeInfoForm">
+					  <div><p id="cmsgf" style="color:red;font-weight: bold;"></p></div>
+					  <table class="table table-hover" id="customize_table">
+					    <thead>
+					      <tr>
+					          <td class="active"><input type='checkbox' name="allCustomize" onchange="selectAll('allCustomize','customizeId')"></td>
+						      <td class="success"><span style="color:red">*</span>key</td>
+						      <td class="warning"><span style="color:red">*</span>value</td>
+					      </tr>
+					    </thead>
+					    <tbody id="customize_list">
+					      <tr></tr>
+				        </tbody>
+					  </table>
+					  </form>
+				  </div>
+				  <div id="fieldFormInfoDiv" style="display:none">
+					  <div>
+					  <div style="float:left;"></div>
+					     <div style="float:right;margin-bottom: 5px;">
+						  <button type="button"class="btn btn-primary btn-sm" onclick="addField()"><span class="glyphicon glyphicon-plus"></span></button>
+						  <button type="button"class="btn btn-primary btn-sm" onclick="removeField()"><span class="glyphicon glyphicon-minus"></span></button>
+					  </div>
+					  </div>
+					  <form role="form" id="baseMetaDataFieldForm">
+					  <div><p id="emsgf" style="color:red;font-weight: bold;"></p></div>
+					  <table class="table table-hover" id="field_table">
+					    <thead>
+					      <tr>
+					          <td class="active"><input type='checkbox' name="allCheck" onchange="selectAll('allCheck','fieldId')"></td>
+						      <td class="success"><span style="color:red">*</span>表字段名</td>
+						      <td class="warning"><span style="color:red">*</span>名称</td>
+						      <td class="danger">类型</td>
+						      <td class="info">长度</td>
+						      <td class="active">默认值</td>
+						      <td class="success">主键</td>
+						      <td class="warning">必填</td>
+						      <td class="danger">索引值</td>
+						      <td class="info">描述</td>
+					      </tr>
+					    </thead>
+					    <tbody id="base_field_list">
+					      <tr></tr>
+				        </tbody>
+					  </table>
+					  </form>
+				  </div>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-default" onclick="saveOrUpdate()">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- --------------------------------------------------------------------------- -->
+<div class="modal fade bs-example-modal-lg" id="getBaseMeta_Info" tabindex="-1" role="dialog"
+	aria-labelledby="getBaseMetaLabel" aria-hidden="false">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="getBaseMetaLabel">提取类型元数据信息</h4>
+			</div>
+			<div class="modal-body">
+			   <div id="pickInfo">
+				 <form class="form-inline" id="sTypeMetaDataForm">
+					<div class="form-group">
+					    <label>对应资源元数据：</label>
+					    <select id="smetadataResource" class="form-control" onchange="changeResource(1,10)">
+					    </select>
+					</div>
+				  </form>
+				  <table class="table table-hover" style="margin-top: 10px;">
+				     <thead>
+				       <tr>
+				         <td class="active"><input type='checkbox' name="allCheckByTable" onchange="selectAll('allCheckByTable','tableName')"></td>
+				         <td class="success">编号</td>
+				         <td class="warning">表名</td>
+				       </tr>
+				     </thead>
+				     <tbody id="tables_list">
+				     </tbody>
+				     <tfoot>
+				       <tr>
+				         <td colspan="3">
+				           <div style="float: right;" >
+							   <nav>  
+							       <ul class="pagination" id="pageULTable" style="padding: 0px;margin: 0px;"></ul>
+							       <div style="float:right;margin-left:20px;margin-top: 8px">
+					        	     <span class="pgo">跳转<input type="text" style="width:30px;height:20px" id="goValuTable">页</span>
+					        	     <a href="#" class="pbtn" id="goTable">GO</a>
+					        	   </div>  
+							   </nav>  
+				          </div>
+				         </td>
+				       </tr>
+				     </tfoot>
+				  </table>
+				</div>
+				<div id="previewFieldInfo" style="display:none">
+				  <p><button class="btn btn-primary btn-sm glyphicon glyphicon-chevron-left" onclick="backPick()">返回</button></p>
+				  <p>请选择需要隐藏的字段：</p>
+				  <table class="table table-hover" style="margin-top: 10px;">
+				     <thead>
+				       <tr>
+				         <td class="active"><input type='checkbox' name="allCheckByField" onchange="selectAll('allCheckByField','fieldName')"></td>
+				         <td class="success">编号</td>
+				         <td class="warning">字段名</td>
+				       </tr>
+				     </thead>
+				     <tbody id="fields_list">
+				     </tbody>
+				     <tfoot>
+				       <tr>
+				         <td colspan="3">
+				           <div style="float: right;" >
+							   <nav>  
+							       <ul class="pagination" id="pageULField" style="padding: 0px;margin: 0px;"></ul>
+							       <div style="float:right;margin-left:20px;margin-top: 8px">
+					        	     <span class="pgo">跳转<input type="text" style="width:30px;height:20px" id="goValuField">页</span>
+					        	     <a href="#" class="pbtn" id="goField">GO</a>
+					        	   </div>  
+							   </nav>  
+				          </div>
+				         </td>
+				       </tr>
+				     </tfoot>
+				  </table>
+				</div>
+				<div id="previewInfo" style="display:none">
+				  <p><button class="btn btn-primary btn-sm glyphicon glyphicon-chevron-left" onclick="backPick()">返回</button></p>
+				  <table class="table table-hover" style="margin-top: 10px;">
+				     <thead id="preview_head">
+				     </thead>
+				     <tbody id="preview_body">
+				     </tbody>
+				     <tfoot>
+				       <tr>
+				         <td id="footPage" colspan="3">
+				           <div style="float: right;">
+							   <nav>  
+							       <ul class="pagination" id="pageULPre" style="padding: 0px;margin: 0px;"></ul>
+							       <div style="float:right;margin-left:20px;margin-top: 8px">
+					        	     <span class="pgo">跳转<input type="text" style="width:30px;height:20px" id="goValuPre">页</span>
+					        	     <a href="#" class="pbtn" id="goPre">GO</a>
+					        	   </div>  
+							   </nav>  
+				          </div>
+				         </td>
+				       </tr>
+				     </tfoot>
+				  </table>
+				</div>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-primary" id="previewField_btn" onclick="previewField(1,10)">预览字段</button>
+			    <button type="button" class="btn btn-primary" id="preview_btn" onclick="preview(1,10)">预览</button>
+			    <button type="button" class="btn btn-primary" id="save_btn" onclick="save()">提交</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- --------------------------------------------------------------------------- -->
+<div class="modal fade bs-example-modal-lg" id="relation_info" tabindex="-1" role="dialog"
+	aria-labelledby="relationLabel" aria-hidden="false">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+				<h4 class="modal-title" id="relationLabel">关联类型元数据信息</h4>
+			</div>
+			<div class="modal-body">
+			   <form class="form-horizontal">
+					<div class="form-group" >
+					    <label class="col-sm-2 control-label">类型元数据A：</label>
+					    <div class="col-sm-4">
+					      <input type="text"  readonly="readonly"  class="form-control" id="metadataA" />
+					    </div>
+					    <label class="col-sm-2 control-label">A关联字段：</label>
+					    <div class="col-sm-4">
+					      <select id="fieldA" class="form-control">
+					      </select>
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label class="col-sm-2 control-label">类型元数据B：</label>
+					    <div class="col-sm-4">
+					      <select id="metadataB" class="form-control" onchange="changeFieldB()">
+					      </select>
+					    </div>
+					    <label class="col-sm-2 control-label">B关联字段：</label>
+					    <div class="col-sm-4">
+					      <select id="fieldB" class="form-control">
+					        <option>--请选择--</option>
+					      </select>
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label class="col-sm-2 control-label">关系：</label>
+					    <div class="col-sm-10">
+						    <select id="relation" class="form-control">
+						      <option value="1">一对一</option>
+						      <option value="2">一对多</option>
+						      <option value="3">多对多</option>
+						    </select>
+						</div>
+					</div>
+					<div class="form-group">
+						 <label class="col-sm-2 control-label">描述：</label>
+						 <div class="col-sm-10">
+						   <textarea  class="form-control" id="relationDesc" rows="7" cols="90" placeholder="这是一个关联关系"></textarea>
+						 </div>
+					</div>
+			   </form>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-primary" onclick="saveRelation()">提交</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
